@@ -1,21 +1,21 @@
-# Написать программу, доказывающую или проверяющую,
-# что для множества натуральных чисел выполняется равенство: 1+2+...+n = n(n+1)/2,
-# где n – любое натуральное число.
+# Определить, какое число в массиве встречается чаще всего.
+import random
 
-print("Для проверки равенства 1+2+...+n = n(n+1)/2 ")
-n = int(input("Введите любое натуральное число n: "))
+SIZE = 15
 
-counter = 0
-x1 = 0
-while counter <= n:
-    x1 = x1 + counter
-    counter += 1
-print(f'Левая часть равенства 1+2+...+n = {x1}')
+MIN_ITEM = 0
+MAX_ITEM = 10
+array = [random.randint(MIN_ITEM, MAX_ITEM) for i in range(SIZE)]
 
-x2 = n * (n + 1) / 2
-print(f'Правая часть равенства n(n+1)/2 = {x2}')
 
-if x1 == x2:
-    print('равенство верно')
-else:
-    print('равенство неверно')
+number = 0
+max_counter = 0
+for i in array:
+    counter = 0
+    for item in array:
+        if item == i:
+            counter += 1
+    if counter >= max_counter:
+        max_counter = counter
+        number = i
+print(f'В массиве {array}\nчаще всего встречается число {number}, ({max_counter} раз(а))')
