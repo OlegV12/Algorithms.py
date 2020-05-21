@@ -23,4 +23,4 @@ for item in array:
     elif item < min_item_2:
         min_item_2 = item
 
-print(f'Числа: {min_item_1} и {min_item_2} минимальные в массиве:\n{array}\n')
+print(f'Числа: {min_item_1} и {min_item_2} минимальные в массиве:\n{array}')
