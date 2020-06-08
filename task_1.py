@@ -1,40 +1,24 @@
-# Отсортируйте по убыванию методом пузырька одномерный целочисленный массив,
-# заданный случайными числами на промежутке [-100; 100).
-# Выведите на экран исходный и отсортированный массивы.
-# Сортировка должна быть реализована в виде функции.
-# По возможности доработайте алгоритм (сделайте его умнее).
+# Определить количество различных подстрок с использованием хеш-функции.
+# Задача: на вход функции дана строка, требуется вернуть количество различных подстрок в этой строке.
+# Примечание: в сумму не включаем пустую строку и строку целиком.
 
-import random
-
-SIZE = 10
-MIN_ITEM = -100
-MAX_ITEM = 99
-
-array = [random.randint(MIN_ITEM, MAX_ITEM) for i in range(SIZE)]
-
-print(array)
+import hashlib
 
 
-def bubble_sort(arr):
-    """
-    Функция сортировки пузырьком, доработана так, что если при проходе циклом по массиву,
-    не произошло ни одной перестановки, массив считается отсортированным и функция завешает работу.
-    :param arr: array
-    :return: sorted array
-    """
-    n = 1
-    spam = 0
-    while n < len(arr):
-        for i in range(len(arr) - n):
-            if arr[i] < arr[i + 1]:
-                arr[i], arr[i + 1] = arr[i + 1], arr[i]
-                spam += 1
-            if i == len(arr) - n - 1 and spam == 0:
-                return arr
-        spam = 0
-        n += 1
-    return arr
+def hash_substring(strng):
+    result = []
+    for i in range(len(strng)):
+        for spam in range(i, len(strng) + 1):
+            h_subs = [hashlib.sha1(strng[i:spam].encode('utf-8')).hexdigest()]
+            if h_subs not in result and h_subs != [hashlib.sha1(''.encode('utf-8')).hexdigest()] and \
+                    h_subs != [hashlib.sha1(strng.encode('utf-8')).hexdigest()]:
+                result.append(h_subs)
+    return len(result)
 
 
-a = bubble_sort(array)
-print(a)
+a = 'papa'
+c = 'sova'
+b = hash_substring(a)
+d = hash_substring(c)
+
+print(b, d, sep='\n')
